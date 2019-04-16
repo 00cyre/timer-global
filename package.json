@@ -1,0 +1,16 @@
+{
+  "name": "noticias",
+  "version": "0.0.1",
+  "description": "Diw Project",
+  "main": "init.js",
+  "scripts": {
+    "start": "node init.js"
+  },
+  "author": "ayaz",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  }
+}
