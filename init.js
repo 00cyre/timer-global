@@ -6,7 +6,7 @@ var
   var http = require('http').createServer(app)
   var io = require('socket.io')(http);
   var fs = require('fs');
-  http.listen(PORT);  
+  http.listen(PORT || 80);  
 
   app.use(express.urlencoded());
 
@@ -70,6 +70,6 @@ var
     res.sendFile(__dirname+"/main.js");
   });
 
-  app.listen(PORT,"0.0.0.0", function () {
+  app.listen(process.env.PORT || 80,"0.0.0.0", function () {
     console.log('Example app listening on port 3000!');
   });
