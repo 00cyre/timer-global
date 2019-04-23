@@ -8,31 +8,89 @@
     <link rel="stylesheet" href="main.css">
     <script src="/socket.io/socket.io.js"></script>
     <script src='main.js'></script>
-
+    <!--<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    -->
 </head>
 <script>
 
 var socket = io();
 fstart();
-socket.on("Stop",function(req,res){
+
+socket.on("Stop",function(data){
     stop();
-console.log("Requested to stop!");
+console.log("Requested to Stop!" , data);
 });
 socket.on("Start",function(req,res){
+  if(req.obj != null)
+  {
+    start(req.obj);
+  }
+  else
+  {
     start();
-    console.log("Requested to stop!");
+  }
+    console.log("Requested to Start!");
 });
 socket.on("Cont",function(req,res){
     cont();
-    console.log("Requested to stop!");
+    console.log("Requested to Continue!");
 });
 socket.on("Reset",function(req,res){
     reset();
-    console.log("Requested to stop!");
+    console.log("Requested to Reset!");
+});
+socket.on("fill",function(req,res){
+  fill(req.obj);
+  console.log("Requested to Fill Entrada!");
 });
 </script>
+
 <body>    
-            <p id="timer"></p>
+        <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="dropdown">
+                            <p id="categoria"></p>
+                            <p id="timer" class="timer"></p>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="tabela">
+                                        <p class="header-text" >Ordem de Entrada</p>
+                                        <table class="table" id="Entrada">
+                                                <thead>
+                                                  <tr>
+                                                    <th scope="col">Pos</th>
+                                                    <th scope="col">Competidor</th>
+                                                    <th scope="col">Animal</th>
+                                                  </tr>
+                                                </thead>
+
+                                              </table>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                    <div class="tabela">
+                                <p class="header-text">Classificação</p>
+                                <table class="table" id="Classificacao">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Pos</th>
+                                            <th scope="col">Competidor</th>
+                                            <th scope="col">Animal</th>
+                                            <th scope="col">T/N</th>
+                                          </tr>
+                                        </thead>
+                                        
+                                      </table>  
+                                      </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <ul class="results"></ul>
 </body>
 </html>
+<script>    clearids();</script>

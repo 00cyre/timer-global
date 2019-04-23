@@ -8,8 +8,31 @@ var
   var fs = require('fs');
   http.listen(3000);  
 
+  app.use(express.urlencoded());
 
+  // Parse JSON bodies (as sent by API clients)
+  app.use(express.json());
+  
+  // Used to initialize the timer with some pre defined values
+  // Access the parse results as request.body
+  app.post('/start', function(request, response){
+    //get all the elements
+    io.emit("Start",{obj : request.body});
 
+    return response.send('Requested POST to Start!');
+  });
+  //expected an array with the structure defined with Giulio
+  app.post("/fill",function(req,res){
+    io.emit("fill",{obj : req.body});
+    return res.send("Requested POST to fill!");
+  });
+  //used for sending all the informaiton in ordem de entrada
+  app.post('/init', function(request, response){
+    //get all the elements
+    io.emit("Start",{obj : request.body});
+
+    return response.send('Requested POST to Init with the parameters: ' + request.body.dupla[0].categoria);
+  });
   io.on("connection",function(socket){
       console.log("Successfully syncronized.");
       socket.on("Pong",function(){
@@ -18,16 +41,10 @@ var
       socket.on('disconnect', function(){
         console.log('Disconnected');
       });
-      
-      
-      app.get("/start", function(req,res){
-    
-       
-      });
   })
   app.get("/stop", function(req,res){
-    io.emit("Stop");
-    return res.send('Requested to stop');
+    io.emit("Stop",{ dupla: req.query.dupla});
+    return res.send('Requested to stop ' + req.query.dupla);
   });
   
   app.get("/start", function(req,res){
@@ -42,7 +59,7 @@ var
     io.emit("Cont");
     return res.send('Requested to stop');
   });
-  
+
   app.get('/', function (req, res) {
     res.sendFile(__dirname+'/index.html'); 
   });
