@@ -24,6 +24,7 @@ console.log("Requested to Stop!" , data);
 socket.on("Start",function(req,res){
   if(req.obj != null)
   {
+    console.log(req.obj);
     start(req.obj);
   }
   else
