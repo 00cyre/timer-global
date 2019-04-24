@@ -51,12 +51,12 @@ function duplicateChildNodes (parentId){
 };
 socket.on("fill",function(req,res){
   document.getElementById("Entrada").innerHTML = `<thead id="headord">
-                                                  <tr>
-                                                    <th scope="col">Pos</th>
-                                                    <th scope="col">Competidor</th>
-                                                    <th scope="col">Animal</th>
-                                                  </tr>
-                                                </thead>`;
+                                                    <tr>
+                                                      <th scope="col">Pos</th>
+                                                      <th scope="col">Competidor</th>
+                                                      <th scope="col">Animal</th>
+                                                    </tr>
+                                                  </thead>`;
   fill(req.obj);
   
   console.log(req.obj);

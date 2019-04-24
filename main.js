@@ -54,6 +54,8 @@ function stop(stop)
 var sortstart = false;
 function start(data)
 {
+    
+    data.dupla = data;
     if (!sortstart)
         {
             sort();
