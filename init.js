@@ -49,6 +49,11 @@ var
     return res.send('Requested to stop ' + req.query.dupla);
   });
   
+  app.post("/stop", function(req,res){
+    io.emit("Stop",{ dupla: req.query.dupla});
+    return res.send('Requested to stop ' + req.query.dupla);
+  });
+
   app.get("/start", function(req,res){
     io.emit("Start");
     return res.send('Requested to Start');

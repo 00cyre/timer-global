@@ -1,6 +1,3 @@
-
-var startDate = new Date("Apr 17, 2019 13:41:00.725").getTime();
-var endDate   = new Date("Apr 17, 2019 13:51:00.725").getTime();
 var cronometro = new Date().getMilliseconds();
 var shouldstop = false;
 var tempo = 0;
@@ -9,15 +6,14 @@ var currentitem;
 var strs = new Array();
 function clearids()
 {
-    
     var classes = document.getElementsByClassName("timer");
     for (var i = 0;i < classes.length;i++)
     {
-        
         classes[i].innerHTML = (tempo/ 1000 ).toFixed(3);
         classes[i].removeAttribute("class");
     }
 }
+
 function fill(data)
 {
     data.dupla = data;
@@ -29,7 +25,6 @@ function fill(data)
         element.competidores.forEach(elz => {
             str += ``+ elz + `<br>`;
         });
-
         str += `</td><td>`;
         element.animais.forEach(an => {
             str += ``+ an + `<br>`;
@@ -37,14 +32,13 @@ function fill(data)
         str += `</td>
       </tr>
       `
-      
     strs.push(str);
     document.getElementById("Entrada").innerHTML += str;
-    }
-            
+    }  
 }
 function stop(stop)
 {
+    data.dupla = data;
     tempo = cronometro;
     shouldstop = true;
     clearids();
@@ -61,7 +55,7 @@ function start(data)
             sort();
             sortstart = true;
         }
-    tempo = cronometro;
+    tempo = new Date(data.dupla[0].tempoini).getMilliseconds();;
     clearids();
     cronometro = 0;
     shouldstop = false;
