@@ -69,7 +69,14 @@ function start(data)
     {
         let now;
         document.getElementById("categoria").innerHTML = data.dupla[0].categoria;
-        now = new Date();
+        if (data.dupla[0].tempofim != "")
+        {
+            now = data.dupla[0].tempofim;
+        }
+        else
+        {
+            now = new Date();
+        }
         let received = new Date(data.dupla[0].tempoini);
         let diff = (now -  received) ;
         startTime = received;
