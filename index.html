@@ -42,6 +42,8 @@ socket.on("Reset",function(req,res){
 });
 socket.on("fill",function(req,res){
   fill(req.obj);
+  
+  console.log(req.obj);
   console.log("Requested to Fill Entrada!");
 });
 </script>

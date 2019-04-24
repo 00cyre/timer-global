@@ -24,6 +24,7 @@ var
   //expected an array with the structure defined with Giulio
   app.post("/fill",function(req,res){
     io.emit("fill",{obj : req.body});
+    console.log(req.body);
     return res.send("Requested POST to fill!");
   });
   //used for sending all the informaiton in ordem de entrada
