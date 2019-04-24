@@ -23,6 +23,7 @@ var
   });
   //expected an array with the structure defined with Giulio
   app.post("/fill",function(req,res){
+    
     io.emit("fill",{obj : req.body});
     console.log(req.body);
     return res.send("Requested POST to fill!");
@@ -32,7 +33,7 @@ var
     //get all the elements
     io.emit("Start",{obj : request.body});
 
-    return response.send('Requested POST to Init with the parameters: ' + request.body.dupla[0].categoria);
+    return response.send('Requested POST to Init with the parameters: ' + request.body[0].categoria);
   });
   io.on("connection",function(socket){
       console.log("Successfully syncronized.");

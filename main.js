@@ -20,6 +20,7 @@ function clearids()
 }
 function fill(data)
 {
+    data.dupla = data;
     for(var i = 0; i < data.dupla.length;i++)
     {
         var element = data.dupla[i];
