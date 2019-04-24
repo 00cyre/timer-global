@@ -67,8 +67,16 @@ function start(data)
     shouldstop = false;
     if (data.dupla.length > 0)
     {
+        let now;
         document.getElementById("categoria").innerHTML = data.dupla[0].categoria;
-        let now = new Date();
+        if (data.dupla[0].tempofim != "")
+        {
+            now = new Date();
+        }
+        else
+        {
+            now = data.dupla[0].tempofim;
+        }
         let received = new Date(data.dupla[0].tempoini);
         let diff = (now -  received) ;
         startTime = received;
