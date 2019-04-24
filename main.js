@@ -1,7 +1,7 @@
 var cronometro = new Date().getMilliseconds();
 var shouldstop = false;
-var tempo = 0;
 var startTime = 0;
+var finishTime = 0;
 var currentitem;
 var strs = new Array();
 function clearids()
@@ -9,7 +9,7 @@ function clearids()
     var classes = document.getElementsByClassName("timer");
     for (var i = 0;i < classes.length;i++)
     {
-        classes[i].innerHTML = (tempo/ 1000 ).toFixed(3);
+        classes[i].innerHTML = (cronometro / 1000 ).toFixed(3);
         classes[i].removeAttribute("class");
     }
 }
@@ -36,26 +36,39 @@ function fill(data)
     document.getElementById("Entrada").innerHTML += str;
     }  
 }
-function stop(stop)
+
+function stop(data)
 {
     data.dupla = data;
-    tempo = cronometro;
-    shouldstop = true;
-    clearids();
+    sortstart = true;
+    if (data.dupla.length > 0)
+    {
+        let now;
+        now = new Date(data.dupla[0].tempofim);
+     
+        let received = new Date(data.dupla[0].tempoini);
+        startTime = received;
+        finishTime = now;
+        //document.getElementById("timer")[0].innerHTML = diff / 1000;
+    }
+    if (!sortstart)
+    {
+        sort();
+        sortstart = true;
+    }
     
-
+    shouldstop = true;
 }
 var sortstart = false;
 function start(data)
 {
-    
+    finishTime = 0;
     data.dupla = data;
     if (!sortstart)
         {
             sort();
             sortstart = true;
         }
-    tempo = new Date(data.dupla[0].tempoini).getMilliseconds();;
     clearids();
     cronometro = 0;
     shouldstop = false;
@@ -65,7 +78,7 @@ function start(data)
         document.getElementById("categoria").innerHTML = data.dupla[0].categoria;
         if (data.dupla[0].tempofim != "")
         {
-            now = data.dupla[0].tempofim;
+            now = new Date(data.dupla[0].tempofim);
         }
         else
         {
@@ -172,8 +185,15 @@ function fstart()
     var x = setInterval(function() {
         if (!shouldstop)
             {
-                
-                cronometro = Date.now() - startTime;
+                if (finishTime != 0)
+                {
+                    cronometro = finishTime - startTime;
+                }
+                else
+                {
+                    cronometro = new Date() - startTime;
+                }
+                //classificação timer
                 var classes = document.getElementsByClassName("timer");
                 
                 Array.prototype.forEach.call (classes, function (node) {
@@ -186,13 +206,29 @@ function fstart()
                         node.innerHTML = (cronometro / 1000 ).toFixed(3);
                     }
                 } );
-
+                //big timer
                 document.getElementById("timer").innerHTML = (cronometro / 1000 ).toFixed(3);
 
             }
         else if (shouldstop) 
             {
+                cronometro = finishTime - startTime;
+                var classes = document.getElementsByClassName("timer");
                 
+                Array.prototype.forEach.call (classes, function (node) {
+                    if (node.innerHTML == null)
+                    {
+                        node.innerHTML = (cronometro / 1000 ).toFixed(3);
+                    }
+                    else
+                    {
+                        node.innerHTML = (cronometro / 1000 ).toFixed(3);
+                    }
+                } );
+                //big timer
+                document.getElementById("timer").innerHTML = (cronometro / 1000 ).toFixed(3);
+                
+                clearids();
             }
         }, 10);
         

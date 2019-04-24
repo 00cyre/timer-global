@@ -17,9 +17,11 @@
 var socket = io();
 fstart();
 
-socket.on("Stop",function(data){
-    stop(data);
-console.log("Requested to Stop!" , data);
+socket.on("Stop",function(req,res){
+
+    stop(req.obj);
+    
+console.log("Requested to Stop!" , req);
 });
 socket.on("Start",function(req,res){
   if(req.obj != null)
