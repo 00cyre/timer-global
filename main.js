@@ -85,10 +85,19 @@ function start(data)
             element.animais.forEach(an => {
                 str += ``+ an + `<br>`;
             });
+            if (element.tempofim != "SAT")
+            {
             str += `</td>
             <td class='timer'></td>
           </tr>
-          `
+          `;
+            }else
+            {
+                str += `</td>
+                <td>SAT</td>
+              </tr>
+              `;  
+            }
         });
         strs.push(str);
         document.getElementById("Classificacao").innerHTML += str;
@@ -99,6 +108,9 @@ function start(data)
 function cont()
 {
     shouldstop = false;
+}
+function insertAfter(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 function sort(){
     var x = setInterval(function(){
@@ -123,10 +135,14 @@ function sort(){
         x = rows[i].getElementsByTagName("TD")[2];
         y = rows[i + 1].getElementsByTagName("TD")[2];
         //check if the two rows should switch place:
-        if (x.innerHTML > y.innerHTML) {
+        if (y.innerHTML < x.innerHTML && y.innerHTML != "SAT") {
           //if so, mark as a switch and break the loop:
           shouldSwitch = true;
           break;
+        }
+        else if (y.innerHTML == "SAT")
+        {
+            rows[i].parentNode.insertAfter(rows[i + 1], rows[i])
         }
       }
       if (shouldSwitch) {
