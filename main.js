@@ -4,6 +4,7 @@ var startTime = 0;
 var finishTime = 0;
 var currentitem;
 var firsttime = true;
+var finished = false;
 var strs = new Array();
 function clearids()
 {
@@ -40,6 +41,7 @@ function fill(data)
 
 function stop(data)
 {
+    finished = true;
     data.dupla = data;
     sortstart = true;
     if (data.dupla.length > 0)
@@ -63,7 +65,7 @@ function stop(data)
 var sortstart = false;
 function start(data)
 {
-    
+    if (finished){
     firsttime = false;
                     
     finishTime = 0;
@@ -120,6 +122,8 @@ function start(data)
         });
         strs.push(str);
         document.getElementById("Classificacao").innerHTML += str;
+    }
+    finished = false;
     }
 
 
@@ -189,30 +193,49 @@ function fstart()
     var x = setInterval(function() {
         if (!shouldstop)
             {
-                if (finishTime != 0)
-                {
-                    cronometro = finishTime - startTime;
-                }
-                else
-                {
-                    cronometro = new Date() - startTime;
-                }
-                //classificação timer
-                var classes = document.getElementsByClassName("timer");
-                
-                Array.prototype.forEach.call (classes, function (node) {
-                    if (node.innerHTML == null)
+                if (finishTime != "SAT"){
+                    if (finishTime != 0)
                     {
-                        node.innerHTML = (cronometro / 1000 ).toFixed(3);
+                        cronometro = finishTime - startTime;
                     }
                     else
                     {
-                        node.innerHTML = (cronometro / 1000 ).toFixed(3);
+                        cronometro = new Date() - startTime;
                     }
-                } );
-                //big timer
-                document.getElementById("timer").innerHTML = (cronometro / 1000 ).toFixed(3);
-
+                    //classificação timer
+                    var classes = document.getElementsByClassName("timer");
+                    
+                    Array.prototype.forEach.call (classes, function (node) {
+                        if (node.innerHTML == null)
+                        {
+                            node.innerHTML = (cronometro / 1000 ).toFixed(3);
+                        }
+                        else
+                        {
+                            node.innerHTML = (cronometro / 1000 ).toFixed(3);
+                        }
+                    } );
+                    //big timer
+                    document.getElementById("timer").innerHTML = (cronometro / 1000 ).toFixed(3);
+                    }
+                    else
+                    {
+                        //classificação timer
+                        var classes = document.getElementsByClassName("timer");
+                        
+                        Array.prototype.forEach.call (classes, function (node) {
+                            if (node.innerHTML == null)
+                            {
+                                node.innerHTML = "SAT";// (cronometro / 1000 ).toFixed(3);
+                            }
+                            else
+                            {
+                                node.innerHTML = "SAT";//(cronometro / 1000 ).toFixed(3);
+                            }
+                        } );
+                        //big timer
+                        document.getElementById("timer").innerHTML = "SAT";//(cronometro / 1000 ).toFixed(3);
+                    }
             }
         else if (shouldstop) 
             {
@@ -224,23 +247,45 @@ function fstart()
                 }
                 else
                 {
-                cronometro = finishTime - startTime;
-                var classes = document.getElementsByClassName("timer");
-                
-                Array.prototype.forEach.call (classes, function (node) {
-                    if (node.innerHTML == null)
-                    {
-                        node.innerHTML = (cronometro / 1000 ).toFixed(3);
+                    if (finishTime != "SAT"){
+                        cronometro = finishTime - startTime;
+                        var classes = document.getElementsByClassName("timer");
+                        
+                        Array.prototype.forEach.call (classes, function (node) {
+                            if (node.innerHTML == null)
+                            {
+                                node.innerHTML = (cronometro / 1000 ).toFixed(3);
+                            }
+                            else
+                            {
+                                node.innerHTML = (cronometro / 1000 ).toFixed(3);
+                            }
+                        } );
+                        //big timer
+                        document.getElementById("timer").innerHTML = (cronometro / 1000 ).toFixed(3);
+                        
+                        clearids();
                     }
                     else
                     {
-                        node.innerHTML = (cronometro / 1000 ).toFixed(3);
+                        //cronometro = finishTime - startTime;
+                        var classes = document.getElementsByClassName("timer");
+                        
+                        Array.prototype.forEach.call (classes, function (node) {
+                            if (node.innerHTML == null)
+                            {
+                                node.innerHTML = "SAT";//(cronometro / 1000 ).toFixed(3);
+                            }
+                            else
+                            {
+                                node.innerHTML = "SAT";//(cronometro / 1000 ).toFixed(3);
+                            }
+                        } );
+                        //big timer
+                        document.getElementById("timer").innerHTML = "SAT";//(cronometro / 1000 ).toFixed(3);
+                        
+                        clearids();
                     }
-                } );
-                //big timer
-                document.getElementById("timer").innerHTML = (cronometro / 1000 ).toFixed(3);
-                
-                clearids();
                 }
             }
         }, 10);
