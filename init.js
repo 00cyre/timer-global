@@ -2,7 +2,7 @@ var
   ssl = true,
   express = require('express'),
   app = express()
-
+  var key = "VtzqnvvbIxpDkyJK1GcptSmIa0IUTbUY";
   var http = require('http').createServer(app)
   var io = require('socket.io')(http);
   var fs = require('fs');
@@ -17,16 +17,33 @@ var
   // Access the parse results as request.body
   app.post('/start', function(request, response){
     //get all the elements
-    io.emit("Start",{obj : request.body});
+    if (request.query.key == key)
+    {
+      console.log("Authenticated");
+      io.emit("Start",{obj : request.body});
 
     return response.send('Requested POST to Start!');
+    }
+    else 
+    {
+      console.log("Incorrect Key");
+      return response.status(404).send('404 Not Found');
+    }
   });
   //expected an array with the structure defined with Giulio
   app.post("/fill",function(req,res){
-    
-    io.emit("fill",{obj : req.body});
-    console.log(req.body);
-    return res.send("Requested POST to fill!");
+    if (req.query.key == key)
+    {
+      console.log("Authenticated");
+      io.emit("fill",{obj : req.body});
+      console.log(req.body);
+      return res.send("Requested POST to fill!");
+    }
+    else 
+    {
+      console.log("Incorrect Key");
+      return res.status(404).send('404 Not Found');
+    }
   });
   //used for sending all the informaiton in ordem de entrada
   app.post('/init', function(request, response){
@@ -46,21 +63,35 @@ var
   })
 
   app.post("/stop", function(req,res){
-    io.emit("Stop",{ obj: req.body});
+    if (req.query.key == key)
+    {
+      console.log("Authenticated");
+      io.emit("Stop",{ obj: req.body});
     return res.send('Requested to stop ' + req.query.dupla);
+    }
+    else 
+    {
+      console.log("Incorrect Key");
+      return res.status(404).send('404 Not Found');
+    }
   });
 
-  app.get("/start", function(req,res){
-    io.emit("Start");
-    return res.send('Requested to Start');
-  });
-  app.get("/reset", function(req,res){
-    io.emit("Reset");
-    return res.send('Requested to stop');
-  });
+  //app.get("/reset", function(req,res){
+  //  io.emit("Reset");
+  //  return res.send('Requested to stop');
+  //});
   app.get("/cont", function(req,res){
-    io.emit("Cont");
-    return res.send('Requested to stop');
+    if (req.query.key == key)
+    {
+      console.log("Authenticated");
+      io.emit("Cont");
+      return res.send('Requested to stop');
+    }
+    else 
+    {
+      console.log("Incorrect Key");
+      return res.status(404).send('404 Not Found');
+    }
   });
 
   app.get('/', function (req, res) {
