@@ -44,7 +44,6 @@ function stop(data)
 {
     finished = true;
     data.dupla = data;
-    sortstart = true;
     if (data.dupla.length > 0)
     {
         let now;
@@ -156,9 +155,15 @@ function sort(){
         y = rows[i + 1].getElementsByTagName("TD")[2];
         //check if the two rows should switch place:
         if(y.innerHTML != "SAT")
-        {
-            
-            rows[i + 1].getElementsByTagName("TH")[0].innerHTML = i + 1;
+        { 
+            if (x.innerHTML == "SAT")
+            {
+                rows[i + 1].getElementsByTagName("TH")[0].innerHTML = i;
+            }
+            else
+            {
+                rows[i + 1].getElementsByTagName("TH")[0].innerHTML = i + 1;
+            }
             if (x.innerHTML != "SAT")
             {
                 rows[i].getElementsByTagName("TH")[0].innerHTML = i;
@@ -267,7 +272,6 @@ function fstart()
                         //big timer
                         document.getElementById("timer").innerHTML = (cronometro / 1000 ).toFixed(3);
                         
-                        clearids();
                     }
                     else
                     {
@@ -287,7 +291,6 @@ function fstart()
                         //big timer
                         document.getElementById("timer").innerHTML = "SAT";
                         
-                        clearids();
                     }
                 }
             }
