@@ -11,7 +11,8 @@ function clearids()
     var classes = document.getElementsByClassName("timer");
     for (var i = 0;i < classes.length;i++)
     {
-        classes[i].innerHTML = (cronometro / 1000 ).toFixed(3);
+        classes[i].innerHTML != "SAT" ? classes[i].innerHTML = (cronometro / 1000 ).toFixed(3) : true;
+        
         classes[i].removeAttribute("class");
     }
 }
@@ -47,12 +48,16 @@ function stop(data)
     if (data.dupla.length > 0)
     {
         let now;
-        now = new Date(data.dupla[0].tempofim);
-     
+        data.dupla[0].tempofim != "SAT" ? now = new Date(data.dupla[0].tempofim) : now = "SAT";
+        
+
         let received = new Date(data.dupla[0].tempoini);
         startTime = received;
         finishTime = now;
-        //document.getElementById("timer")[0].innerHTML = diff / 1000;
+        if (finishTime == "SAT")
+        {
+            document.getElementById("timer")[0].innerHTML = "SAT";
+        }
     }
     if (!sortstart)
     {
@@ -67,7 +72,7 @@ function start(data)
 {
     if (finished){
     firsttime = false;
-                    
+    
     finishTime = 0;
     data.dupla = data;
     if (!sortstart)
@@ -106,19 +111,12 @@ function start(data)
             element.animais.forEach(an => {
                 str += ``+ an + `<br>`;
             });
-            if (element.tempofim != "SAT")
-            {
+            
             str += `</td>
             <td class='timer'></td>
           </tr>
           `;
-            }else
-            {
-                str += `</td>
-                <td>SAT</td>
-              </tr>
-              `;  
-            }
+           
         });
         strs.push(str);
         document.getElementById("Classificacao").innerHTML += str;
@@ -173,6 +171,11 @@ function sort(){
         }
         else if (y.innerHTML == "SAT")
             {
+                rows[i + 1].getElementsByTagName("TH")[0].innerHTML = "";
+                if (x.innerHTML == "SAT")
+                {
+                    rows[i].getElementsByTagName("TH")[0].innerHTML = "";
+                }
                 //rows[i].parentNode.insertAfter(rows[i + 1], rows[i])
             }
       }
@@ -226,15 +229,15 @@ function fstart()
                         Array.prototype.forEach.call (classes, function (node) {
                             if (node.innerHTML == null)
                             {
-                                node.innerHTML = "SAT";// (cronometro / 1000 ).toFixed(3);
+                                node.innerHTML = "SAT";
                             }
                             else
                             {
-                                node.innerHTML = "SAT";//(cronometro / 1000 ).toFixed(3);
+                                node.innerHTML = "SAT";
                             }
                         } );
                         //big timer
-                        document.getElementById("timer").innerHTML = "SAT";//(cronometro / 1000 ).toFixed(3);
+                        document.getElementById("timer").innerHTML = "SAT";
                     }
             }
         else if (shouldstop) 
@@ -274,15 +277,15 @@ function fstart()
                         Array.prototype.forEach.call (classes, function (node) {
                             if (node.innerHTML == null)
                             {
-                                node.innerHTML = "SAT";//(cronometro / 1000 ).toFixed(3);
+                                node.innerHTML = "SAT";
                             }
                             else
                             {
-                                node.innerHTML = "SAT";//(cronometro / 1000 ).toFixed(3);
+                                node.innerHTML = "SAT";
                             }
                         } );
                         //big timer
-                        document.getElementById("timer").innerHTML = "SAT";//(cronometro / 1000 ).toFixed(3);
+                        document.getElementById("timer").innerHTML = "SAT";
                         
                         clearids();
                     }
