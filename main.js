@@ -4,7 +4,7 @@ var startTime = 0;
 var finishTime = 0;
 var currentitem;
 var firsttime = true;
-var finished = false;
+var finished = true;
 var strs = new Array();
 function clearids()
 {
