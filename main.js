@@ -1,8 +1,9 @@
 var cronometro = new Date().getMilliseconds();
-var shouldstop = false;
+var shouldstop = true;
 var startTime = 0;
 var finishTime = 0;
 var currentitem;
+var firsttime = true;
 var strs = new Array();
 function clearids()
 {
@@ -62,6 +63,9 @@ function stop(data)
 var sortstart = false;
 function start(data)
 {
+    
+    firsttime = false;
+                    
     finishTime = 0;
     data.dupla = data;
     if (!sortstart)
@@ -212,6 +216,14 @@ function fstart()
             }
         else if (shouldstop) 
             {
+                //é a primeira vez rodando? 
+                if (firsttime)
+                {
+                    //primeira vez rodando
+                document.getElementById("timer").innerHTML = "0.000";
+                }
+                else
+                {
                 cronometro = finishTime - startTime;
                 var classes = document.getElementsByClassName("timer");
                 
@@ -229,6 +241,7 @@ function fstart()
                 document.getElementById("timer").innerHTML = (cronometro / 1000 ).toFixed(3);
                 
                 clearids();
+                }
             }
         }, 10);
         
