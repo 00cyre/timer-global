@@ -156,35 +156,30 @@ function sort(){
         x = rows[i].getElementsByTagName("TD")[2];
         y = rows[i + 1].getElementsByTagName("TD")[2];
         //check if the two rows should switch place:
-        if(y.innerHTML != "SAT")
-        { 
-            if (x.innerHTML == "SAT")
-            {
-                rows[i + 1].getElementsByTagName("TH")[0].innerHTML = i;
-            }
-            else
-            {
-                rows[i + 1].getElementsByTagName("TH")[0].innerHTML = i + 1;
-            }
-            if (x.innerHTML != "SAT")
-            {
-                rows[i].getElementsByTagName("TH")[0].innerHTML = i;
-            }
-            if (y.innerHTML < x.innerHTML) {
+
+        //#region SAT Check
+        if (x.innerHTML == "SAT")
+        {
+            rows[i].getElementsByTagName("TH")[0].innerHTML = "";
+        }
+        if(y.innerHTML == "SAT")
+        {
+            rows[i + 1].getElementsByTagName("TH")[0].innerHTML = "";
+        }
+        else
+        
+        //#endregion
+        {
+            rows[i].getElementsByTagName("TH")[0].innerHTML = i;
+            rows[i + 1].getElementsByTagName("TH")[0].innerHTML = i + 1;
+
+            if (Number(y.innerHTML.split('/')[0]) < Number(x.innerHTML.split('/')[0])) {
             //if so, mark as a switch and break the loop:
             shouldSwitch = true;
             break;
             }
         }
-        else if (y.innerHTML == "SAT")
-            {
-                rows[i + 1].getElementsByTagName("TH")[0].innerHTML = "";
-                if (x.innerHTML == "SAT")
-                {
-                    rows[i].getElementsByTagName("TH")[0].innerHTML = "";
-                }
-                //rows[i].parentNode.insertAfter(rows[i + 1], rows[i])
-            }
+
       }
       if (shouldSwitch) {
         /*If a switch has been marked, make the switch
