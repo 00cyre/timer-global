@@ -5,13 +5,14 @@ var finishTime = 0;
 var currentitem;
 var firsttime = true;
 var finished = true;
+var StructData = 0;
 var strs = new Array();
 function clearids()
 {
     var classes = document.getElementsByClassName("timer");
     for (var i = 0;i < classes.length;i++)
     {
-        classes[i].innerHTML != "SAT" ? classes[i].innerHTML = (cronometro / 1000 ).toFixed(3) : true;
+        classes[i].innerHTML != "SAT" ? classes[i].innerHTML = (cronometro / 1000 ).toFixed(3)  + "/" + StructData.numero : true;
         
         classes[i].removeAttribute("class");
     }
@@ -101,6 +102,7 @@ function start(data)
         let numeracao = 1;
         var str = "";
         data.dupla.forEach(element => {
+            StructData = element;
             str +=`<tr class="items"><th scope="row" class="pos"></th><td>`;
             element.competidores.forEach(elz => {
                 str += ``+ elz + `<br>`;
@@ -112,7 +114,7 @@ function start(data)
             });
             
             str += `</td>
-            <td class='timer'></td>
+            <td class='timer'> /`+element.numero+`</td>
           </tr>
           `;
            
@@ -193,6 +195,71 @@ function sort(){
     }
     },1000);
 }
+
+function iterateandset(classname = "timer",elementid = "timer",issat = false)
+{
+    if (!issat)
+    {
+        if (finishTime != 0)
+        {
+            cronometro = finishTime - startTime;
+        }
+        else
+        {
+            cronometro = new Date() - startTime;
+        }
+        var classes = document.getElementsByClassName(classname);
+        var calculatedtime = cronometro /1000;
+        calculatedtime > 0 ? calculatedtime = calculatedtime : calculatedtime = 0;
+        if (calculatedtime > 0)
+        {
+            Array.prototype.forEach.call (classes, function (node) {
+                if (node.innerHTML == null)
+                {
+                    node.innerHTML = (calculatedtime).toFixed(3) + "/" + StructData.numero;
+                }
+                else
+                {
+                    node.innerHTML = (calculatedtime).toFixed(3) + "/" + StructData.numero;
+                }
+            } );
+            //big timer
+            document.getElementById(elementid).innerHTML = (calculatedtime).toFixed(3);
+        }
+        else
+        {
+            Array.prototype.forEach.call (classes, function (node) {
+                if (node.innerHTML == null)
+                {
+                    node.innerHTML = "0.000";
+                }
+                else
+                {
+                    node.innerHTML = "0.000";
+                }
+            } );
+            //big timer
+            document.getElementById(elementid).innerHTML = "0.000";
+        }
+    }
+    else
+    {
+        var classes = document.getElementsByClassName(classname);
+                        
+        Array.prototype.forEach.call (classes, function (node) {
+            if (node.innerHTML == null)
+            {
+                node.innerHTML = "SAT";
+            }
+            else
+            {
+                node.innerHTML = "SAT";
+            }
+        } );
+        //big timer
+        document.getElementById(elementid).innerHTML = "SAT";
+    }
+}
 // Update the count down every 1 second
 function fstart()
 {
@@ -201,49 +268,14 @@ function fstart()
     var x = setInterval(function() {
         if (!shouldstop)
             {
-                if (finishTime != "SAT"){
-                    if (finishTime != 0)
-                    {
-                        cronometro = finishTime - startTime;
-                    }
-                    else
-                    {
-                        cronometro = new Date() - startTime;
-                    }
-                    //classificação timer
-                    var classes = document.getElementsByClassName("timer");
-                    
-                    Array.prototype.forEach.call (classes, function (node) {
-                        if (node.innerHTML == null)
-                        {
-                            node.innerHTML = (cronometro / 1000 ).toFixed(3);
-                        }
-                        else
-                        {
-                            node.innerHTML = (cronometro / 1000 ).toFixed(3);
-                        }
-                    } );
-                    //big timer
-                    document.getElementById("timer").innerHTML = (cronometro / 1000 ).toFixed(3);
-                    }
-                    else
-                    {
-                        //classificação timer
-                        var classes = document.getElementsByClassName("timer");
-                        
-                        Array.prototype.forEach.call (classes, function (node) {
-                            if (node.innerHTML == null)
-                            {
-                                node.innerHTML = "SAT";
-                            }
-                            else
-                            {
-                                node.innerHTML = "SAT";
-                            }
-                        } );
-                        //big timer
-                        document.getElementById("timer").innerHTML = "SAT";
-                    }
+                if (finishTime != "SAT")
+                {
+                    iterateandset();
+                }
+                else
+                {
+                    iterateandset(undefined,undefined,true);
+                }
             }
         else if (shouldstop) 
             {
@@ -256,41 +288,11 @@ function fstart()
                 else
                 {
                     if (finishTime != "SAT"){
-                        cronometro = finishTime - startTime;
-                        var classes = document.getElementsByClassName("timer");
-                        
-                        Array.prototype.forEach.call (classes, function (node) {
-                            if (node.innerHTML == null)
-                            {
-                                node.innerHTML = (cronometro / 1000 ).toFixed(3);
-                            }
-                            else
-                            {
-                                node.innerHTML = (cronometro / 1000 ).toFixed(3);
-                            }
-                        } );
-                        //big timer
-                        document.getElementById("timer").innerHTML = (cronometro / 1000 ).toFixed(3);
-                        
+                        iterateandset();
                     }
                     else
                     {
-                        //cronometro = finishTime - startTime;
-                        var classes = document.getElementsByClassName("timer");
-                        
-                        Array.prototype.forEach.call (classes, function (node) {
-                            if (node.innerHTML == null)
-                            {
-                                node.innerHTML = "SAT";
-                            }
-                            else
-                            {
-                                node.innerHTML = "SAT";
-                            }
-                        } );
-                        //big timer
-                        document.getElementById("timer").innerHTML = "SAT";
-                        
+                        iterateandset(undefined,undefined,true);
                     }
                 }
             }

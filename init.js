@@ -85,7 +85,7 @@ var
     {
       console.log("Authenticated");
       io.emit("Cont");
-      return res.send('Requested to stop');
+      return res.send('Requested to Continue');
     }
     else 
     {
