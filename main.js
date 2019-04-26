@@ -51,6 +51,7 @@ function stop(data)
         data.dupla[0].tempofim != "SAT" ? now = new Date(data.dupla[0].tempofim) : now = "SAT";
         
 
+        StructData = data.dupla[0];
         let received = new Date(data.dupla[0].tempoini);
         startTime = received;
         finishTime = now;
@@ -135,6 +136,8 @@ function insertAfter(newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 function sort(){
+    //used to store the latest valid classification rank
+    var oij = 0;
     var x = setInterval(function(){
     var table, rows, switching, i, x, y, shouldSwitch;
     table = document.getElementById("Classificacao");
@@ -161,6 +164,11 @@ function sort(){
         if (x.innerHTML == "SAT")
         {
             rows[i].getElementsByTagName("TH")[0].innerHTML = "";
+            if (y.innerHTML != "SAT")
+            {
+                shouldSwitch = true;
+                break;
+            }
         }
         if(y.innerHTML == "SAT")
         {
@@ -170,9 +178,9 @@ function sort(){
         
         //#endregion
         {
+
             rows[i].getElementsByTagName("TH")[0].innerHTML = i;
             rows[i + 1].getElementsByTagName("TH")[0].innerHTML = i + 1;
-
             if (Number(y.innerHTML.split('/')[0]) < Number(x.innerHTML.split('/')[0])) {
             //if so, mark as a switch and break the loop:
             shouldSwitch = true;
