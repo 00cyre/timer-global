@@ -19,9 +19,9 @@ function clearids()
 }
 function del()
 {
-    cronometro = 0;
-    shouldstop = true;
-    
+    stop();
+    //reset timer to 0
+    firsttime =true;
     document.getElementById("Classificacao").children.length > 1 ? document.getElementById("Classificacao").children[document.getElementById("Classificacao").children.length - 1].remove() : true;
 }
 function fill(data)
@@ -47,9 +47,10 @@ function fill(data)
     }  
 }
 
-function stop(data)
+function stop(data = null)
 {
     finished = true;
+    if (data !=  null){
     data.dupla = data;
     if (data.dupla.length > 0)
     {
@@ -66,6 +67,7 @@ function stop(data)
             document.getElementById("timer")[0].innerHTML = "SAT";
         }
     }
+}
     if (!sortstart)
     {
         sort();
