@@ -45,6 +45,22 @@ var
       return res.status(404).send('404 Not Found');
     }
   });
+  //delete
+
+  app.post("/delete",function(req,res){
+    if (req.query.key == key)
+    {
+      console.log("Authenticated");
+      io.emit("delete",{obj : req.body});
+      console.log(req.body);
+      return res.send("Requested POST to delete!");
+    }
+    else 
+    {
+      console.log("Incorrect Key");
+      return res.status(404).send('404 Not Found');
+    }
+  });
   //used for sending all the informaiton in ordem de entrada
   app.post('/init', function(request, response){
     //get all the elements

@@ -23,6 +23,9 @@ socket.on("Stop",function(req,res){
     
 console.log("Requested to Stop!" , req);
 });
+socket.on("delete",function(req,res){
+  del();
+})
 socket.on("Start",function(req,res){
   if(req.obj != null)
   {

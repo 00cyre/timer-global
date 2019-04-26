@@ -17,7 +17,13 @@ function clearids()
         classes[i].removeAttribute("class");
     }
 }
-
+function del()
+{
+    cronometro = 0;
+    shouldstop = true;
+    
+    document.getElementById("Classificacao").children[document.getElementById("Classificacao").children.length - 1] > 0 ? document.getElementById("Classificacao").children[document.getElementById("Classificacao").children.length - 1].remove() : true;
+}
 function fill(data)
 {
     data.dupla = data;
