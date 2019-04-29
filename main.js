@@ -13,9 +13,9 @@ function clearids()
     for (var i = 0;i < classes.length;i++)
     {
         classes[i].innerHTML != "SAT" ? classes[i].innerHTML = (cronometro / 1000 ).toFixed(3) : true;
-        if (StructData.numero != 10)
+        if (Number(StructData.numero) != 10)
         {
-            classes[i].innerHTML += + "/" + StructData.numero;
+            classes[i].innerHTML += "/" + StructData.numero;
         }
         classes[i].classList.remove("timer");
     }
