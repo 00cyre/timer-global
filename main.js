@@ -12,9 +12,12 @@ function clearids()
     var classes = document.getElementsByClassName("timer");
     for (var i = 0;i < classes.length;i++)
     {
-        classes[i].innerHTML != "SAT" ? classes[i].innerHTML = (cronometro / 1000 ).toFixed(3)  + "/" + StructData.numero : true;
-        
-        classes[i].removeAttribute("class");
+        classes[i].innerHTML != "SAT" ? classes[i].innerHTML = (cronometro / 1000 ).toFixed(3) : true;
+        if (StructData.numero != 10)
+        {
+            classes[i].innerHTML += + "/" + StructData.numero;
+        }
+        classes[i].classList.remove("timer");
     }
 }
 function del()
@@ -43,8 +46,12 @@ function fill(data)
       </tr>
       `
     strs.push(str);
-    document.getElementById("Entrada").innerHTML += str;
     }  
+    str = "";
+    strs.forEach(element => {
+        str += element;
+    });
+    document.getElementById("Entrada").innerHTML = str;
 }
 
 function stop(data = null)
@@ -112,18 +119,18 @@ function start(data)
         var str = "";
         data.dupla.forEach(element => {
             StructData = element;
-            str +=`<tr class="items"><th scope="row" class="pos"></th><td>`;
+            str +=`<tr class="items"><th scope="row" class="pos"></th><td class="comp">`;
             element.competidores.forEach(elz => {
                 str += ``+ elz + `<br>`;
             });
 
-            str += `</td><td>`;
+            str += `</td><td class="animals">`;
             element.animais.forEach(an => {
                 str += ``+ an + `<br>`;
             });
             
             str += `</td>
-            <td class='timer'> /`+element.numero+`</td>
+            <td class='timer times'> /`+element.numero+`</td>
           </tr>
           `;
            
@@ -227,11 +234,23 @@ function iterateandset(classname = "timer",elementid = "timer",issat = false)
             Array.prototype.forEach.call (classes, function (node) {
                 if (node.innerHTML == null)
                 {
-                    node.innerHTML = (calculatedtime).toFixed(3) + "/" + StructData.numero;
+                    if (StructData.numero != 10){
+                        node.innerHTML = (calculatedtime).toFixed(3) + "/" + StructData.numero;
+                    }
+                    else
+                    {
+                        node.innerHTML = (calculatedtime).toFixed(3);
+                    }
                 }
                 else
                 {
-                    node.innerHTML = (calculatedtime).toFixed(3) + "/" + StructData.numero;
+                    if (StructData.numero != 10){
+                        node.innerHTML = (calculatedtime).toFixed(3) + "/" + StructData.numero;
+                    }
+                    else
+                    {
+                        node.innerHTML = (calculatedtime).toFixed(3);
+                    }
                 }
             } );
             //big timer
