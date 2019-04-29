@@ -46,12 +46,10 @@ function fill(data)
       </tr>
       `
     strs.push(str);
+    
+    document.getElementById("Entrada").innerHTML += str;
     }  
-    str = "";
-    strs.forEach(element => {
-        str += element;
-    });
-    document.getElementById("Entrada").innerHTML = str;
+    
 }
 
 function stop(data = null)
@@ -119,7 +117,7 @@ function start(data)
         var str = "";
         data.dupla.forEach(element => {
             StructData = element;
-            str +=`<tr class="items"><th scope="row" class="pos"></th><td class="comp">`;
+            str +=`<tr class="items"><th scope="row" class="pos posi"></th><td class="comp">`;
             element.competidores.forEach(elz => {
                 str += ``+ elz + `<br>`;
             });
