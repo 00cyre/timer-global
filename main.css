@@ -1,6 +1,6 @@
 /*! CSS Used from: http://localhost:3000/main.css */
-#timer{font-size:256pt;text-align:center;top:40px;text-shadow:0px -5px 13px #1D4848;}
-#categoria{text-align:center;color:#1d4848;font-size:36px;margin-bottom:0px;}
+#timer{font-size:256pt;text-align:center;top:40px;text-shadow:0px -5px 13px #1D4848;top:0px;font-size:256pt;text-align:center;vertical-align:top;text-shadow:0px -5px 13px #1D4848;width:100%;display:inline-block;height:450px;}
+#categoria{color:#1d4848;text-align:center;font-size:72px;margin:0 auto;width:100%;display:inline-block;vertical-align:top;height:0px;}
 .tabela{padding-right:5px;padding-left:5px;background-color:#1d484811;border-radius:10px;}
 .header-text{text-align:center;font-size:36pt;background-color:#1d4848;border-radius:25px;color:white;vertical-align:middle;}
 .results{border-color:lime;list-style:none;margin:0;padding:0;position:absolute;bottom:0;left:50%;transform:translateX(-50%);}
@@ -31,17 +31,10 @@ body{min-width:992px!important;}
 .table{border-collapse:collapse!important;}
 .table td,.table th{background-color:#fff!important;}
 }
-.comp{font-size: 32px;font-weight: 600;}
-.times{font-size: 64px;
-    font-weight: 600;}
-.animals{
-    font-size: 32px;
-    width: 324px;
-    font-weight: 600;
-}
-.posi{font-size: 32px;
-    vertical-align: middle;}
-/*! CSS Used from: https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css */
+.comp{font-size:32px;font-weight:600;}
+.times{font-size:64px;font-weight:600;}
+.animals{font-size:32px;width:324px;font-weight:600;}
+.posi{font-size:32px;vertical-align:middle;}
 :root{--blue:#007bff;--indigo:#6610f2;--purple:#6f42c1;--pink:#e83e8c;--red:#dc3545;--orange:#fd7e14;--yellow:#ffc107;--green:#28a745;--teal:#20c997;--cyan:#17a2b8;--white:#fff;--gray:#6c757d;--gray-dark:#343a40;--primary:#007bff;--secondary:#6c757d;--success:#28a745;--info:#17a2b8;--warning:#ffc107;--danger:#dc3545;--light:#f8f9fa;--dark:#343a40;--breakpoint-xs:0;--breakpoint-sm:576px;--breakpoint-md:768px;--breakpoint-lg:992px;--breakpoint-xl:1200px;--font-family-sans-serif:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;}
 *,::after,::before{box-sizing:border-box;}
 html{font-family:sans-serif;line-height:1.15;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;}
@@ -61,7 +54,6 @@ th{text-align:inherit;}
 .table{width:100%;margin-bottom:1rem;color:#212529;}
 .table td,.table th{padding:.75rem;vertical-align:top;border-top:1px solid #dee2e6;}
 .table thead th{vertical-align:bottom;border-bottom:2px solid #dee2e6;}
-.table tbody+tbody{border-top:2px solid #dee2e6;}
 .dropdown{position:relative;}
 @media print{
 *,::after,::before{text-shadow:none!important;box-shadow:none!important;}
