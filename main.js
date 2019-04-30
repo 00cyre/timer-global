@@ -25,7 +25,7 @@ function del() {
     stop();
     //reset timer to 0
     firsttime = true;
-            document.getElementById("Classificacao").children[lastid].remove();
+    document.getElementById("Classificacao").removeChild(document.getElementById("Classificacao").children[lastid])
     
 }
 function fill(data) {
