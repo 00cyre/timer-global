@@ -150,7 +150,7 @@ function sort() {
         while (switching) {
             //start by saying: no switching is done:
             switching = false;
-            rows = table.rows;
+            rows = table.children;
             /*Loop through all table rows (except the
             first, which contains table headers):*/
             for (i = 1; i < (rows.length - 1); i++) {
