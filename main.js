@@ -199,6 +199,11 @@ function sort() {
 }
 
 function iterateandset(classname = "timer", elementid = "timer", issat = false) {
+    var boi = "";
+    if (!finished)
+    {
+        boi = StructData.boiSort;
+    }
     if (!issat) {
         if (finishTime != 0) {
             cronometro = finishTime - startTime;
@@ -229,6 +234,8 @@ function iterateandset(classname = "timer", elementid = "timer", issat = false) 
                 }
             });
             //big timer
+            if (StructData.boiSort != undefined || StructData.boiSort != "")
+                document.getElementById("nbois").innerHTML = StructData.boiSort;
             document.getElementById(elementid).innerHTML = (calculatedtime).toFixed(3);
         }
         else {
@@ -242,6 +249,7 @@ function iterateandset(classname = "timer", elementid = "timer", issat = false) 
             });
             //big timer
             document.getElementById(elementid).innerHTML = "0.000";
+            document.getElementById("nbois").innerHTML = "0";
         }
     }
     else {
@@ -259,7 +267,8 @@ function iterateandset(classname = "timer", elementid = "timer", issat = false) 
         document.getElementById(elementid).innerHTML = "SAT";
     }
 }
-// Update the count down every 1 second
+
+// Update the count down every 10 milisecond
 function fstart() {
     startTime = Date.now();
 
@@ -288,6 +297,8 @@ function fstart() {
             if (firsttime) {
                 //primeira vez rodando
                 document.getElementById("timer").innerHTML = "0.000";
+                
+            document.getElementById("nbois").innerHTML = "0";
             }
             else {
                 if (finishTime != "SAT") {
